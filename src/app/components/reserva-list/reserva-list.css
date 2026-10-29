@@ -1,0 +1,43 @@
+.cabecera { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 1rem; }
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    background: #fff; }
+th, td { 
+    padding: .6rem .75rem; 
+    border-bottom: 1px solid #e3e6ec; 
+    text-align: left; 
+    font-size: .92rem; }
+th { 
+    background: #1f3a8a; 
+    color: #fff; }
+.vacio { 
+    text-align: center; 
+    color: #6b7280; 
+    padding: 1.5rem; }
+.acciones { 
+    display: flex; 
+    gap: .4rem; }
+.estado { 
+    padding: .15rem .55rem; 
+    border-radius: 999px; 
+    font-size: .8rem; 
+    font-weight: 600; }
+.estado.pendiente { 
+    background: #fef3c7; 
+    color: #92400e; }
+.estado.confirmada { 
+    background: #d1fae5; 
+    color: #6ed6b9; }
+.estado.cancelada { 
+    background: #fee2e2; 
+    color: #991b1b; }
+.alerta { 
+    background: #fee2e2; 
+    color: #991b1b; 
+    padding: .6rem .9rem; 
+    border-radius: 6px; }

@@ -1,0 +1,37 @@
+form {
+    background: #fff; 
+    padding: 1.25rem; 
+    border-radius: 8px; 
+    max-width: 640px; 
+    display: grid; 
+    gap: 1rem; }
+label { 
+    display: grid; 
+    gap: .3rem; 
+    font-weight: 600; 
+    font-size: .9rem; }
+input, select { 
+    padding: .5rem .6rem; 
+    border: 1px solid #c9ced8; 
+    border-radius: 6px; font: inherit; }
+.fila { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 1rem; }
+small { 
+    color: #b91c1c; 
+    font-weight: 400; }
+.montos { 
+    display: flex; 
+    gap: 2rem; 
+    background: #eef2ff; 
+    padding: .75rem 1rem; 
+    border-radius: 6px; }
+.botones { 
+    display: flex; 
+    gap: .5rem; }
+.alerta { 
+    background: #fee2e2; 
+    color: #991b1b; 
+    padding: .6rem .9rem; 
+    border-radius: 6px; }

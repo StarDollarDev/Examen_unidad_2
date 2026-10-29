@@ -1,0 +1,63 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-upeu-primary text-white">
+      <h4>{{ id ? 'Editar' : 'Nueva' }} Reserva</h4>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="guardar()">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Cliente</label>
+            <input type="text" formControlName="cliente" class="form-control"
+                   [class.is-invalid]="form.get('cliente')?.invalid && form.get('cliente')?.touched">
+            <div class="invalid-feedback">El cliente es obligatorio (mín. 3 caracteres).</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Servicio</label>
+            <input type="text" formControlName="servicio" class="form-control"
+                   [class.is-invalid]="form.get('servicio')?.invalid && form.get('servicio')?.touched">
+            <div class="invalid-feedback">El servicio es obligatorio.</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Cantidad</label>
+            <input type="number" formControlName="cantidad" class="form-control" min="1"
+                   [class.is-invalid]="form.get('cantidad')?.invalid && form.get('cantidad')?.touched">
+            <div class="invalid-feedback">La cantidad mínima es 1.</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Precio (S/)</label>
+            <input type="number" formControlName="precio" class="form-control" step="0.01"
+                   [class.is-invalid]="form.get('precio')?.invalid && form.get('precio')?.touched">
+            <div class="invalid-feedback">El precio debe ser mayor a 0.</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Fecha de reserva</label>
+            <input type="date" formControlName="fechaReserva" class="form-control">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Estado</label>
+            <select formControlName="estado" class="form-select">
+              @for (e of estados; track e) {
+                <option [value]="e">{{ e }}</option>
+              }
+            </select>
+          </div>
+        </div>
+
+        <div class="alert alert-info d-flex justify-content-between">
+          <span>Subtotal: <strong>{{ subtotal | currency:'S/ ' }}</strong></span>
+          <span>Total (IGV 18%): <strong>{{ total | currency:'S/ ' }}</strong></span>
+        </div>
+
+        <div class="mt-4">
+          <button type="submit" class="btn btn-primary me-2" [disabled]="form.invalid">Guardar</button>
+          <a routerLink="/reservas" class="btn btn-secondary">Cancelar</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

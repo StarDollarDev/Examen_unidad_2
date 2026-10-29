@@ -1,0 +1,60 @@
+<h2>{{ idReserva() ? 'Editar reserva #' + idReserva() : 'Nueva reserva' }}</h2>
+
+@if (error()) {
+  <p class="alerta">{{ error() }}</p>
+}
+
+<form [formGroup]="form" (ngSubmit)="guardar()" novalidate>
+  <label>
+    Cliente
+    <input type="text" formControlName="cliente" />
+    @if (invalido('cliente')) { <small>El cliente es obligatorio.</small> }
+  </label>
+
+  <label>
+    Servicio
+    <input type="text" formControlName="servicio" />
+    @if (invalido('servicio')) { <small>El servicio es obligatorio.</small> }
+  </label>
+
+  <div class="fila">
+    <label>
+      Cantidad
+      <input type="number" formControlName="cantidad" min="1" />
+      @if (invalido('cantidad')) { <small>Mínimo 1.</small> }
+    </label>
+    <label>
+      Precio (S/)
+      <input type="number" formControlName="precio" min="0" step="0.01" />
+      @if (invalido('precio')) { <small>Precio inválido.</small> }
+    </label>
+  </div>
+
+  <div class="fila">
+    <label>
+      Fecha de reserva
+      <input type="date" formControlName="fechaReserva" />
+      @if (invalido('fechaReserva')) { <small>La fecha es obligatoria.</small> }
+    </label>
+    <label>
+      Estado
+      <select formControlName="estado">
+        @for (e of estados; track e) {
+          <option [value]="e">{{ e }}</option>
+        }
+      </select>
+    </label>
+  </div>
+
+  <div class="montos">
+    <span>Subtotal: <strong>{{ subtotal() | currency: 'S/ ' }}</strong></span>
+    <span>Total (con IGV 18%): <strong>{{ total() | currency: 'S/ ' }}</strong></span>
+  </div>
+
+  <div class="botones">
+    <button type="submit" class="btn btn-primario" [disabled]="guardando()">
+      {{ idReserva() ? 'Actualizar' : 'Guardar' }}
+    </button>
+    <a routerLink="/reservas" class="btn">Cancelar</a>
+  </div>
+</form>

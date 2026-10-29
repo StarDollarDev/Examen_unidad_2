@@ -1,0 +1,52 @@
+<div class="cabecera">
+  <h2>Reservas</h2>
+  <a routerLink="/reservas/nueva" class="btn btn-primario">+ Nueva reserva</a>
+</div>
+
+@if (error()) {
+  <p class="alerta">{{ error() }}</p>
+}
+
+@if (cargando()) {
+  <p>Cargando...</p>
+} @else {
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Servicio</th>
+        <th>Cant.</th>
+        <th>Precio</th>
+        <th>Subtotal</th>
+        <th>Total</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (r of reservas(); track r.idreserva) {
+        <tr>
+          <td>{{ r.idreserva }}</td>
+          <td>{{ r.cliente }}</td>
+          <td>{{ r.servicio }}</td>
+          <td>{{ r.cantidad }}</td>
+          <td>{{ r.precio | currency: 'S/ ' }}</td>
+          <td>{{ r.subtotal | currency: 'S/ ' }}</td>
+          <td>{{ r.total | currency: 'S/ ' }}</td>
+          <td>{{ r.fechaReserva | date: 'dd/MM/yyyy' }}</td>
+          <td><span class="estado" [class]="'estado ' + r.estado.toLowerCase()">{{ r.estado }}</span></td>
+          <td class="acciones">
+            <a [routerLink]="['/reservas/editar', r.idreserva]" class="btn">Editar</a>
+            <button type="button" class="btn btn-peligro" (click)="eliminar(r)">Eliminar</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="10" class="vacio">No hay reservas registradas.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

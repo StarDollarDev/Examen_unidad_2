@@ -1,0 +1,45 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="text-upeu-primary">Gestión de reservas</h2>
+    <a routerLink="/reservas/nuevo" class="btn btn-success">Nueva Reserva</a>
+  </div>
+  <table class="table table-hover shadow-sm align-middle">
+    <thead class="bg-upeu-primary text-white">
+      <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Servicio</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+        <th>Subtotal</th>
+        <th>Total</th>
+        <th>Fecha Reserva</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (r of reservas; track r.idreserva) {
+        <tr>
+          <td>{{ r.idreserva }}</td>
+          <td>{{ r.cliente }}</td>
+          <td>{{ r.servicio }}</td>
+          <td>{{ r.cantidad }}</td>
+          <td>{{ r.precio | currency:'S/ ' }}</td>
+          <td>{{ r.subtotal | currency:'S/ ' }}</td>
+          <td>{{ r.total | currency:'S/ ' }}</td>
+          <td>{{ r.fechaReserva | date:'dd/MM/yyyy' }}</td>
+          <td><span class="badge" [ngClass]="claseEstado(r.estado)">{{ r.estado }}</span></td>
+          <td>
+            <a [routerLink]="['/reservas/editar', r.idreserva]" class="btn btn-sm btn-warning me-2">Editar</a>
+            <button (click)="eliminar(r.idreserva!)" class="btn btn-sm btn-danger">Eliminar</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="10" class="text-center text-muted py-4">No hay reservas registradas.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
